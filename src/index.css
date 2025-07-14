@@ -1,18 +1,16 @@
-/* Root or HTML styling. */
 :root {
-  /* Nav text, heading text, link hover bg, footer text, and input text. */
   --titleColor: #0a2540;
   --textColor: #425466;
-  /* Link bg, button bg, and emphasized text. */
   --accentColor: #635bff;
   --muted-color: #596171;
-  /* Body bg and input bg. */
   --backgroundColor: #f6f9fc;
   --buttonDisabledColor: #cfd7df;
   --inputPlaceholderColor: #727f96;
   --inputErrorAccentColor: #ff5996;
   --cardBackground: #fff;
   --cardBorderColor: #cbd6e0;
+  --cardShadowXSmall: 0 3px 6px -1px rgba(50, 50, 93, 0.25),
+    0 1px 4px -1px rgba(0, 0, 0, 0.3);
   --cardShadowSmall: 0 6px 12px -2px rgba(50, 50, 93, 0.25),
     0 3px 7px -3px rgba(0, 0, 0, 0.3);
   --cardShadowMedium: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
@@ -29,27 +27,70 @@
   --viewportWidthSmall: 375px;
   --viewportWidthMedium: 600px;
   --viewportWidthLarge: 1112px;
-  --maxScreenSmall: min(var(--viewportWidthMedium), calc(70% + 100px));
+  --maxScreenSmall: min(var(--viewportWidthSmall), calc(70% + 100px));
+  --maxScreenMedium: min(var(--viewportWidthMedium), calc(70% + 100px));
   --maxScreenLarge: min(var(--viewportWidthLarge), calc(70% + 100px));
 }
 
-/* All element styles. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 * {
-  list-style: none;
   margin: 0;
   padding: 0;
+  list-style: none;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
   min-height: 100vh;
-  box-sizing: border-box;
-  display: block;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: var(--backgroundColor, #f6f9fc);
-  width: var(--maxScreenLarge);
-  margin: 0 auto;
 }
 
-/* @media (prefers-color-scheme: light) {
-} */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

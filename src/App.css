@@ -1,1 +1,45 @@
 /* App Component Styles */
+.heading {
+  padding: 1.5rem 2rem;
+  background-color: var(--cardBackground);
+  box-shadow: var(--cardShadowXSmall);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  h1 {
+    color: var(--titleColor);
+  }
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: var(--muted-color);
+
+  strong {
+    color: var(--accentColor);
+  }
+}
+
+.card {
+  background-color: var(--cardBackground);
+  border-radius: var(--cardBorderRadius);
+  box-shadow: var(--cardShadowSmall);
+  padding: 1rem 2rem;
+  margin: 1rem;
+  width: var(--maxScreenSmall);
+
+  h2 {
+    color: var(--accentColor);
+  }
+
+  p {
+    color: var(--textColor);
+  }
+}
