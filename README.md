@@ -32,3 +32,63 @@ You will see the app break when we move the image with `src={props.img}` into a 
 
 > [!TIP]
 > Instead of using `const ComponentName = (props) => {...}` the props object as an argument in a functional component you can **destructure** the pass in props directly in the parenthesis and remove the `{props.name}` for `{name}` inside the HTML/React template.
+
+## Mapping Data to Components
+
+Instead of rendering multiple _imported_ `ContactCard` components inside `App.js` template you can map over the properties in the `contacts.js` array of objects.
+
+1. Inside App.js add a helper function (you can also just do this part inside the `map` method) called `createCard`.
+2. You need to pass in a `contact` argument (representing each object property as we map over the array) into the `createCard` function.
+3. Add the different properties from `contacts.js` (i.e. name, img, etc.) to the _imported_ `ContactCard` component inside the `createCard` function.
+4. Now, we will add a dynamic code block to the `contactContainer` element within the `App` component template and add `contacts.map()` to it (this will map over the `contacts` array).
+5. As it maps over each object in the `contacts` array we will call the `createCard` helper function to create a `ContactCard` for each iteration.
+
+> [!TIP]
+> Make sure you add an `id` to the `contacts.js` array as well as the `ContactCard` inside the `createCard` function.
+
+You will not be able to call on the `key` as a prop in the functional `ContactCard` component because it is a reserved keyword. If you want to render the `key` in your React template then you will need to create a new prop (i.e. called `id={contact.id}`) inside the `ContactCard` of `createCard` function, destructure that (`id`) inside the functional ContactCard component, and add it to the functional `ContactCard` component template.
+
+For example:
+
+```jsx
+// file: ./src/App.jsx
+
+// Helper functions.
+function createCard(contact) {
+  return (
+    <ContactCard
+      name={contact.name}
+      img={contact.imgUrl}
+      tel={contact.phone}
+      email={contact.email}
+      key={contact.id}
+      id={contact.id}
+    />
+  );
+}
+
+function App() {
+  return (
+    <>
+      <main>
+        <Heading />
+        <section className="contactContainer">
+          {contacts.map(createCard)}
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+// file: ./src/components/ContactCard.jsx
+
+const ContactCard = ({ name, img, tel, email, id }) => {
+  return (
+    <article className="contactCard">
+      <p>Contact ID: {id}</p>
+      {/* OTHER CODE... */}
+    </article>
+  );
+};
+```
