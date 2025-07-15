@@ -1,8 +1,8 @@
-const Card = () => {
+const Card = ({ title, content }) => {
   return (
     <section className="card">
-      <h2>This is the note title</h2>
-      <p>This is the note content</p>
+      <h2>{title}</h2>
+      <p>{content}</p>
     </section>
   );
 };

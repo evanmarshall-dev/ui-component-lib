@@ -25,3 +25,28 @@
     color: var(--accentColor);
   }
 }
+
+.card__container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem;
+  gap: 1rem;
+  align-items: stretch;
+  justify-content: flex-start;
+
+  .card {
+    background-color: var(--cardBackground);
+    border-radius: var(--cardBorderRadius);
+    box-shadow: var(--cardShadowSmall);
+    padding: 1rem 2rem;
+    width: var(--maxScreenSmall);
+
+    h2 {
+      color: var(--accentColor);
+    }
+
+    p {
+      color: var(--textColor);
+    }
+  }
+}
