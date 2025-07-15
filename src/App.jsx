@@ -4,26 +4,38 @@ import Footer from "./components/Footer";
 import Heading from "./components/Heading";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [headingText, setHeadingText] = useState("Hello");
+  const [isMousedOver, setIsMousedOver] = useState(false);
+
+  function handleClick() {
+    console.log("Button Clicked");
+    setHeadingText("Submitted");
+  }
+
+  function handleMouseOver() {
+    console.log("Moused over");
+    setIsMousedOver(true);
+  }
+
+  function handleMouseOut() {
+    console.log("Moused out");
+    setIsMousedOver(false);
+  }
 
   return (
     <>
       <main>
         <Heading />
-        <h2>{count}</h2>
+        <h2>{headingText}</h2>
+        <input type="text" placeholder="Your name" />
         <button
-          onClick={() => {
-            setCount(count + 1);
-          }}
+          style={{ backgroundColor: isMousedOver ? "black" : "white" }}
+          onClick={handleClick}
+          onMouseOver={handleMouseOver}
+          type="submit"
+          onMouseOut={handleMouseOut}
         >
-          +
-        </button>
-        <button
-          onClick={() => {
-            setCount(count - 1);
-          }}
-        >
-          -
+          Submit
         </button>
       </main>
       <Footer />
