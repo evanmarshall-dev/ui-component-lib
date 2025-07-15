@@ -11,30 +11,21 @@
   }
 }
 
-.contactContainer {
+.description {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  /* justify-content: center; */
-  flex-wrap: wrap;
-  gap: 1rem;
   margin: 1rem;
+  gap: 1rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
 
-  .contactCard {
-    background-color: var(--cardBackground);
-    padding: 2rem 1rem;
+  .description__container {
     max-width: var(--maxScreenSmall);
+    background-color: var(--cardBackground);
+    padding: 2rem;
     border-radius: var(--cardBorderRadius);
     box-shadow: var(--cardShadowSmall);
-
-    h2 {
-      color: var(--accentColor);
-    }
-
-    img {
-      border-radius: var(--cardBorderRadius);
-      border: 5px solid var(--cardBorderColor);
-    }
   }
 }
 
