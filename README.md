@@ -131,10 +131,8 @@ const firstNum = numbers.find((num) => {
   return num > 10;
 }); // firstNum = 78
 
-// FINDINDEX
-const firstIndex = numbers.findIndex((idx) => {
-  return idx > 10;
-}); // firstIndex = 4
+// FINDINDEX (With reduced code)
+const firstIndex = numbers.findIndex((idx) => idx > 10); // firstIndex = 4
 ```
 
 ### Map, Filter, or Reduce Challenge
@@ -150,4 +148,32 @@ Take the `emojipedia` array and create a new array containing only the `meaning`
 const truncMeaning = emojipedia.map((obj) => {
   return obj.meaning.substring(0, 100);
 }); // truncMeaning = New array made up of the meaning property truncated to 100 characters.
+```
+
+## ES6 Arrow Functions
+
+> [!NOTE]
+> If you only have one parameter in your arrow function you can remove the parameter parenthesis (i.e. `(param) => {...}` becomes `param => {...}`).
+> If you are only returning a single line statement or expression in an arrow function you can also remove the curly braces and the **return** keyword (i.e. `param => {return x * x}` becomes `param => x * x`).
+
+**_For example_**:
+
+```jsx
+// file: ./src/App.jsx
+
+// OTHER CODE...
+
+// Remove argument parenthesis, return keyword, and curly braces because only one param/arg and only one line of code in return.
+{
+  emojipedia.map((emoji) => (
+    <Emoji
+      key={emoji.id}
+      emoji={emoji.emoji}
+      name={emoji.name}
+      definition={emoji.meaning}
+    />
+  ));
+}
+
+// OTHER CODE...
 ```
