@@ -1,42 +1,39 @@
-import { useState } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import Heading from "./components/Heading";
+import ListItems from "./components/ListItems";
+import transactions from "./data/transactions";
+
+// Return object with customer and totals
+// Highlight the customer with highest total amounts
+// Highlight even if several instances in array.
 
 function App() {
-  const [name, setName] = useState("");
-  const [headingText, setHeadingText] = useState("");
+  let customerTotals = {};
 
-  function handleChange(event) {
-    // console.log("changed");
-    // console.log(event.target.value);
-    // console.log(event.target.placeholder);
-    // console.log(event.target.type);
-    setName(event.target.value);
-  }
+  customerTotals = transactions.reduce((totals, currentTx) => {}, {});
 
-  function handleClick(event) {
-    event.preventDefault();
-    setHeadingText(name);
-  }
+  console.log(customerTotals);
+
+  // const customers = transactions.map((idx) => {
+  //   console.log(idx);
+  //   // return {idx.customer} {idx.amount}
+  // });
 
   return (
     <>
       <main>
         <Heading />
-        {/* <h2>Hello {name}</h2> */}
-        <h2>Hello {headingText}</h2>
-        <form>
-          <input
-            onChange={handleChange}
-            type="text"
-            placeholder="Your name"
-            value={name}
-          />
-          <button onClick={handleClick} type="submit">
-            Submit
-          </button>
-        </form>
+        <h2>Customer Transactions</h2>
+        {transactions.map((item) => {
+          return (
+            <ListItems
+              key={item.id}
+              customer={item.customer}
+              amount={item.amount}
+            />
+          );
+        })}
       </main>
       <Footer />
     </>
