@@ -282,3 +282,17 @@ You can refactor conditional statements even further by using **Logical AND** (`
 
 > [!TIP]
 > You can re-write the ternary using the above method by using two separate statements (one for true and one for false) like this: `{isLoggedIn && <h2>Hello User</h2>}{!isLoggedIn && <Login />}`, but it is not advised to do this if there is an else statement it is handled better using ternary operator.
+
+## Conditional Rendering Challenge
+
+- Create a userIsRegistered variable set to true or false.
+- Show login as the button text if variable is true.
+- Show register as the button text if variable is false.
+- Only show confirm password input if variable is false.
+- Don't show confirm password if variable is true.
+
+### Solution
+
+1. First, pass the variable userIsRegistered to the Login form via a prop. Set the prop isRegistered equal to the value of userIsRegistered variable: `<Login isRegistered={userIsRegistered} />` so it will pass true or false to the login form.
+2. We can now destructure the prop isRegistered in the Login functional component and inside the button element add a ternary operator to render "Login" or "Register" based on if isRegistered is true or not: `<button type="submit">{isRegistered ? "Login" : "Register"}</button>`.
+3. Now we can use logical AND to render the confirm password input if isRegistered is false. By placing the input element within this condition using NOT isRegistered (false) then we do not need to do anything for isRegistered true because it is either on the page via template or not (no else statement): `{!isRegistered && (<Input type="password" placeholder="Confirm Password" />)}`.
