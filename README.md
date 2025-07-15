@@ -296,3 +296,41 @@ You can refactor conditional statements even further by using **Logical AND** (`
 1. First, pass the variable userIsRegistered to the Login form via a prop. Set the prop isRegistered equal to the value of userIsRegistered variable: `<Login isRegistered={userIsRegistered} />` so it will pass true or false to the login form.
 2. We can now destructure the prop isRegistered in the Login functional component and inside the button element add a ternary operator to render "Login" or "Register" based on if isRegistered is true or not: `<button type="submit">{isRegistered ? "Login" : "Register"}</button>`.
 3. Now we can use logical AND to render the confirm password input if isRegistered is false. By placing the input element within this condition using NOT isRegistered (false) then we do not need to do anything for isRegistered true because it is either on the page via template or not (no else statement): `{!isRegistered && (<Input type="password" placeholder="Confirm Password" />)}`.
+
+## React State
+
+Think of state as the user interface (UI) is equal to a function of state of your app (`UI = f(State)`).
+
+**_For example_**:
+
+We have a todo app with list items displayed for todos. If we click on the list item or todo we will cross out the text in the todo (i.e. We might have a variable which monitors task or state being done or not. When clicked the variable or state is true and the todo text is crossed out.)
+
+The key to state and React is that the UI responds to the state. So when state is that a todo or variable is completed (true) we update the UI paragraph text to crossed out and vise versa for when the todo is not complete (false). The UI responds or reacts to the change in state.
+
+The UI is **dependant** on the value of a state variable.
+
+**_For example_**:
+
+```jsx
+function App() {
+  // State variable.
+  let isDone = true;
+
+  // Custom style.
+  const strikeThrough = { textDecoration: "line-through" };
+
+  // If isDone is true then we apply strike-through style and if not no style applied.
+  return <p style={isDone && strikeThrough}>Buy milk</p>;
+}
+```
+
+> [!NOTE]
+> The above type of programming is called **declarative** programming. We declare how the UI should look under different conditions (dependant upon the state).
+> **Imperative** programming is used in JS where we explicitly tell an element to do something (using getElementById, listeners, and helper functions we get a hold of an item and set its properties to a new value).
+
+Since React has elements that are rendered via templates the above example will not work. So React has what is called hooks to accomplish the re-rendering of the template or UI (i.e. `useState` hook).
+
+## `useState`
+
+> [!WARNING]
+> Revisit this lecture and beyond.
