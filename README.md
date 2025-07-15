@@ -92,3 +92,62 @@ const ContactCard = ({ name, img, tel, email, id }) => {
   );
 };
 ```
+
+## Map, Filter, Reduce, and More
+
+- **_Map_**: Creates a new array with the _returned_ output of a callback (cb) function which is called on each element of the array. Map takes the cb as an _argument_ and runs the function on each element of the array, and the new array elements are the _returned_ values of the cb function.
+  - The new array can be assigned to a variable.
+- **_Filter_**: Also creates a new array however the new array is made up of **only** the elements that _return_ `true` in the filter cb function.
+- **_Reduce_**: Accumulates a value by whatever the output of the _return_ is for each element in a array.
+- **_Find_**: Find the first element that matches in an array. It loops through all elements in the array and runs a cb for each element. Within the cb it checks for a condition to be met and _returns_ the **first** element that matches said condition.
+- **_FindIndex_**: Works similar to `find()`, but instead of finding the first element that matches a condition it finds the **index** of said element.
+
+**_For example_**:
+
+```jsx
+// ARRAY
+const numbers = [1, 2, 4, 5, 78, 9, 4, 3];
+
+// MAP
+const doubleNums = numbers.map((x) => {
+  return x * 2;
+}); // doubleNums = [2, 4, 8, 10, 156, 18, 8, 6]
+
+// FILTER
+const greaterThanTen = numbers.filter((num) => {
+  return num > 10;
+}); // greaterThanTen = [78]
+
+// REDUCE
+const sum = numbers.reduce((total, currentNum) => {
+  // console logs to understand.
+  console.log("total(accumulator) = " + total);
+  console.log("current number = " + currentNum);
+  return total + currentNum;
+}, 0); // sum = 106
+
+// FIND
+const firstNum = numbers.find((num) => {
+  return num > 10;
+}); // firstNum = 78
+
+// FINDINDEX
+const firstIndex = numbers.findIndex((idx) => {
+  return idx > 10;
+}); // firstIndex = 4
+```
+
+### Map, Filter, or Reduce Challenge
+
+Take the `emojipedia` array and create a new array containing only the `meaning` element, but the text _value_ of the `meaning` property needs to be **truncated** to 100 characters.
+
+> [!TIP]
+> Use the method `substring()` to complete the challenge (Takes **two** arguments, first is the first index we start at (**including** the index) and second is second index we end at (but **do not** include)).
+
+**_Solution_**:
+
+```jsx
+const truncMeaning = emojipedia.map((obj) => {
+  return obj.meaning.substring(0, 100);
+}); // truncMeaning = New array made up of the meaning property truncated to 100 characters.
+```
