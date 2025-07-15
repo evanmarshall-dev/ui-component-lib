@@ -4,39 +4,39 @@ import Footer from "./components/Footer";
 import Heading from "./components/Heading";
 
 function App() {
-  const [headingText, setHeadingText] = useState("Hello");
-  const [isMousedOver, setIsMousedOver] = useState(false);
+  const [name, setName] = useState("");
+  const [headingText, setHeadingText] = useState("");
 
-  function handleClick() {
-    console.log("Button Clicked");
-    setHeadingText("Submitted");
+  function handleChange(event) {
+    // console.log("changed");
+    // console.log(event.target.value);
+    // console.log(event.target.placeholder);
+    // console.log(event.target.type);
+    setName(event.target.value);
   }
 
-  function handleMouseOver() {
-    console.log("Moused over");
-    setIsMousedOver(true);
-  }
-
-  function handleMouseOut() {
-    console.log("Moused out");
-    setIsMousedOver(false);
+  function handleClick(event) {
+    event.preventDefault();
+    setHeadingText(name);
   }
 
   return (
     <>
       <main>
         <Heading />
-        <h2>{headingText}</h2>
-        <input type="text" placeholder="Your name" />
-        <button
-          style={{ backgroundColor: isMousedOver ? "black" : "white" }}
-          onClick={handleClick}
-          onMouseOver={handleMouseOver}
-          type="submit"
-          onMouseOut={handleMouseOut}
-        >
-          Submit
-        </button>
+        {/* <h2>Hello {name}</h2> */}
+        <h2>Hello {headingText}</h2>
+        <form>
+          <input
+            onChange={handleChange}
+            type="text"
+            placeholder="Your name"
+            value={name}
+          />
+          <button onClick={handleClick} type="submit">
+            Submit
+          </button>
+        </form>
       </main>
       <Footer />
     </>
