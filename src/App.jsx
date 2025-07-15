@@ -1,18 +1,27 @@
 import "./App.css";
-import Card from "./components/Card";
 import Footer from "./components/Footer";
 import Heading from "./components/Heading";
-import notes from "./data/notes";
+import Login from "./components/Login";
+
+let isLoggedIn = false;
+
+// ? function renderConditionally() {
+//   ? if (isLoggedIn === true) {
+//     ? return <h2>Hello User</h2>;
+//   ? } else {
+//     ? return <Login />;
+//   ? }
+// ? }
 
 function App() {
   return (
     <>
       <main>
         <Heading />
-        <section className="card__container">
-          {notes.map((note) => (
-            <Card key={note.key} title={note.title} content={note.content} />
-          ))}
+        <section className="login__container">
+          {/* {isLoggedIn ? <h2>Hello User</h2> : <Login />} */}
+          {isLoggedIn && <h2>Hello User</h2>}
+          {!isLoggedIn && <Login />}
         </section>
       </main>
       <Footer />

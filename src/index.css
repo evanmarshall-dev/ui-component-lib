@@ -5,6 +5,9 @@
   --muted-color: #596171;
   --backgroundColor: #f6f9fc;
   --buttonDisabledColor: #cfd7df;
+  --buttonBorderRadius: 1rem;
+  --buttonBackgroundColor: #0a2540;
+  --buttonColor: #fff;
   --inputPlaceholderColor: #727f96;
   --inputErrorAccentColor: #ff5996;
   --cardBackground: #fff;
@@ -59,6 +62,13 @@ body {
   background-color: var(--backgroundColor, #f6f9fc);
 }
 
+/* Make main a vertical flex container and at least height of viewport. */
+main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 img,
 picture,
 video,
@@ -73,6 +83,11 @@ button,
 textarea,
 select {
   font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
 }
 
 #root,

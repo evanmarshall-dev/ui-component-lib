@@ -177,3 +177,108 @@ const truncMeaning = emojipedia.map((obj) => {
 
 // OTHER CODE...
 ```
+
+## React Component Conditional Rendering
+
+In the project example we will have a variable that is _false_ when user is not logged in and switches to _true_ once authenticated and logged in.
+
+We will render a different component in App.js depending on whether the above value is _true_ or _false_.
+
+**_Method #1_**:
+
+```jsx
+// Represent user login or not.
+let isLoggedIn = true;
+
+// Function that checks if logged in render h2 or if not logged in render login form.
+function renderConditionally() {
+  if (isLoggedIn === true) {
+    return <h2>Hello User</h2>;
+  } else {
+    <h2>Please Login</h2>
+    <form className="form">
+      <input type="text" placeholder="Username" />
+      <input type="password" placeholder="Password" />
+      <button type="submit">Login</button>
+    </form>;
+  }
+}
+
+// Call above function within App component template.
+function App() {
+  return (
+    <div>
+      {renderConditionally()}
+    </div>
+  )
+}
+```
+
+The **_Method #1_** will work, but it uses a lot of code.
+
+**_To refactor_**:
+
+1. Add `form` to its own component called `Login`.
+2. Import `Login` to `App.jsx` and add it to the conditional function under `isLoggedIn === false`.
+3. Add input to its own component (`Input.jsx`) and import into `Login.jsx`.
+4. Add props for `type` and `placeholder` to the input component that was added to `Login.jsx` template and repeat for the password input.
+5. Now delete the input elements from `Input.jsx`, _destructure_ the props from `Login.jsx`, and add the props to a single input element within `Input.jsx` template.
+6. We now want to _refactor_ the `renderConditionally()` function to put it inside the `App` component template, but we **cannot** do this with a _statement_ (**ONLY** _expressions_). We can accomplish this by taking the logic from the helper function and adding it inside the template using _ternary_ operators (Ternary operators turn the statement into an expression).
+
+**_For example_**:
+
+```jsx
+// file: ./src/components/Input.jsx
+const Input = ({ type, placeholder }) => {
+  return <input type={type} placeholder={placeholder} />;
+};
+
+export default Input;
+
+// file: ./src/components/Login.jsx
+import Input from "./Input";
+
+const Login = () => {
+  return (
+    <>
+      <h2>Please Login</h2>
+      <form className="form">
+        <Input type="text" placeholder="Username" />
+        <Input type="password" placeholder="Password" />
+        <button type="submit">Login</button>
+      </form>
+    </>
+  );
+};
+
+export default Login;
+
+// file: ./src/App.jsx
+
+// OTHER CODE...
+
+let isLoggedIn = false;
+
+function App() {
+  return (
+    <>
+      <main>
+        <Heading />
+        <section className="login__container">
+          {/* {isLoggedIn === true ? <h2>Hello User</h2> : <Login />} */}
+          {isLoggedIn ? <h2>Hello User</h2> : <Login />}
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+}
+```
+
+> [!TIP]
+> If you want to show nothing at all for the else statement then you would add `null` after the colon.
+
+You can refactor conditional statements even further by using **Logical AND** (`&&`). If the conditional is a simple `if` statement (no else) and because JS does not evaluate the second half of **AND** if the `if` is **false** you can simply write `{if (true) && "code to run if true"}` and if _false_ then the expression will not evaluate the right side and render **nothing**.
+
+> [!TIP]
+> You can re-write the ternary using the above method by using two separate statements (one for true and one for false) like this: `{isLoggedIn && <h2>Hello User</h2>}{!isLoggedIn && <Login />}`, but it is not advised to do this if there is an else statement it is handled better using ternary operator.
