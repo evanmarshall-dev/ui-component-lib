@@ -332,5 +332,65 @@ Since React has elements that are rendered via templates the above example will 
 
 ## `useState`
 
+### `useState` Challenge
+
+1. Get current time using `Date().toLocalTimeString()`.
+2. Show the current time in the heading when the `Get Time` button is pressed.
+3. Use `setInterval` get the time in the heading to update every second.
+
 > [!WARNING]
-> Revisit this lecture and beyond.
+> If you do not set time increment in `setInterval` it will crash your app by calling the function every millisecond without stopping.
+
+### `useState` Challenge Solution
+
+1. In `App.js` create a function called `currentTime` and set it equal to the new date local time methods.
+2. We will be managing the state of time by click so destructure `useState` hook into _state variable_ `time` and _setter function_ `setTime` as well as set the _initial state_ to the `currentTime` variable which will be the current time by locale.
+3. Add the dynamic value of `time` to the `h2`.
+4. When a user clicks the get current time button we will update the `h2` to the current time which is passed into the `useState` hook. This is done by the `onClick` event running a cb function that adds the current time to the `setTime` _setter function_.
+5. Now to update the time every second after click we need to modify the `onClick` event. Move the setTime(currentTime) into the setInterval method as its first argument. Second argument will be the 1000 milliseconds (1sec.).
+
+**_For example_**:
+
+```jsx
+// file: ./src/App.jsx
+
+import { useState } from "react";
+import "./App.css";
+import Footer from "./components/Footer";
+import Heading from "./components/Heading";
+
+function App() {
+  // As a constant it will only be updated one time (When App component first renders).
+  // ? const currentTime = new Date().toLocaleTimeString();
+  // When state is set to the below function and the on click calls current time function we will get an updated time value each time versus a static constant variable above.
+  const currentTime = () => new Date().toLocaleTimeString();
+  // ? console.log(currentTime);
+  const [time, setTime] = useState(currentTime);
+
+  // In short, when currentTime is a constant value, you keep telling React to set the state to the same old value. When currentTime is a function, you are giving React a recipe to compute a new value every time you click.
+
+  return (
+    <>
+      <main>
+        <Heading />
+        <h2 style={{ textAlign: "center", margin: "1rem" }}>{time}</h2>
+        <button
+          onClick={() => setInterval(() => setTime(currentTime()), 1000)}
+          style={{
+            display: "inline-block",
+            width: "20%",
+            margin: "0 auto",
+            padding: "0.5rem",
+            borderRadius: "1rem",
+          }}
+        >
+          Get Current Time
+        </button>
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+export default App;
+```
